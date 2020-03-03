@@ -30,6 +30,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.alfresco.rest.framework.Api;
 import org.alfresco.rest.framework.core.exceptions.DefaultExceptionResolver;
 import org.alfresco.rest.framework.core.exceptions.ErrorResponse;
@@ -254,6 +255,7 @@ public interface ResponseWriter
             public void writeContents(JsonGenerator generator, ObjectMapper objectMapper)
                         throws JsonGenerationException, JsonMappingException, IOException
             {
+                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
                 objectMapper.writeValue(generator, toSerialize);
             }
         });
